@@ -1,26 +1,28 @@
 ---
-title: First Kubernetes Deployment
-date: 2019-02-01
+title: Scaling My Kubernetes Deployment
+date: 2019-02-02
 tags: ["kubernetes", "code"]
 ---
 
-First application on Kubernetes using Kubernetes deployments
+Scaling my Kubernetes deployment
 
 <!--more-->
 
 ```sh
-    $ kubectl run kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8080
+    $ kubectl scale deployments/kubernetes-bootcamp --replicas=4
 ```
 
-Now, check whether it is running:
+Now, check whether it is scaled up:
 ```sh
-    $ kubectl get pods
-    NAME                                   READY     STATUS    RESTARTS   AGE
-    kubernetes-bootcamp-5c69669756-wv2rp   1/1       Running   0          11s
+    $ kubectl get deployments
+    NAME               DESIRED  CURRENT   UP-TO-DATE    AVAILABLE  AGE
+    kubernets-bootcamp 4        4         4             4          26s
+    
+    $ kubectl get pods -o wide
+    NAME                        READY       STATUS      RESTART     AGE     IP              NODE
+    kubernets-bootcamp-12345    1/1         Running     0           3s      172.18.0.7      minikube
+    kubernets-bootcamp-23456    1/1         Running     0           3s      172.18.0.4      minikube
+    kubernets-bootcamp-asc34    1/1         Running     0           3s      172.18.0.5      minikube
+    kubernets-bootcamp-456tf    1/1         Running     0           20s     172.18.0.8      minikube
 ```
 
-We can check application logs:
-```sh
-$ kubectl logs kubernetes-bootcamp-5c69669756-wv2rp
-Kubernetes Bootcamp App Started At: 2018-10-20T13:38:41.537Z | Running On:  kubernetes-bootcamp-5c69669756-wv2rp
-```
