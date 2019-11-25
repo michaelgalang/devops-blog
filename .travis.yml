@@ -2,7 +2,7 @@ language: go
 go:
    - 1.11.x
 install:
-   - go get gitbub.com/gohugoio/hugo
+   - go get github.com/gohugoio/hugo
 script:
    - mkdir -p themes/beautifulhugo && git clone https://GitHub.com/halogenica/beautifulhugo.git themese/beautifulhugo
    - hugo --theme beautifulhugo
